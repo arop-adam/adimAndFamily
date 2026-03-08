@@ -1,4 +1,5 @@
-import { Target, Eye, Building2 } from 'lucide-react';
+import { Target, Eye } from 'lucide-react';
+import logoPng from '/logo.png';
 
 export default function About() {
   return (
@@ -53,7 +54,11 @@ export default function About() {
 
         <div className="mt-16 bg-gray-50 p-8 rounded-xl">
           <div className="flex items-center justify-center mb-6">
-            <Building2 className="w-10 h-10 text-red-600 mr-3" />
+            <img
+              src={logoPng}
+              alt="Adim & Family Investments logo"
+              className="w-10 h-10 mr-3 object-contain"
+            />
             <h3 className="text-2xl font-bold text-blue-900">Company Details</h3>
           </div>
           <div className="grid md:grid-cols-4 gap-6 text-center">

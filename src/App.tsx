@@ -5,16 +5,8 @@ import Services from './components/Services';
 import Objectives from './components/Objectives';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import AdminRoute from './components/AdminRoute';
 
 function App() {
-  // Simple route detection - check for both base paths
-  const pathname = window.location.pathname;
-  
-  if (pathname === '/admin' || pathname.endsWith('/admin')) {
-    return <AdminRoute />;
-  }
-
   return (
     <div className="min-h-screen">
       <Header />

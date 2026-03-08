@@ -19,25 +19,11 @@ export default function Contact() {
 
     try {
       // Create email content
-      const emailContent = {
-        to: 'adimfamilyinvestment@gmail.com',
-        subject: `New Contact Form: ${formData.subject}`,
-        body: `
-Name: ${formData.name}
-Email: ${formData.email}
-Phone: ${formData.phone}
-
-Message:
-${formData.message}
-        `.trim()
-      };
-
-      // Use EmailJS or similar service (you'll need to set this up)
-      // For now, I'll create a mailto link as fallback
-      const mailtoLink = `mailto:${emailContent.to}?subject=${encodeURIComponent(emailContent.subject)}&body=${encodeURIComponent(emailContent.body)}`;
+      const subject = encodeURIComponent(`New Contact: ${formData.subject}`);
+      const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone || 'Not provided'}\n\nMessage:\n${formData.message}\n\n---\nSent from Adim & Family Investment Website`);
       
-      // Open email client
-      window.location.href = mailtoLink;
+      // Open email client with pre-filled content
+      window.location.href = `mailto:adimfamilyinvestment@gmail.com?subject=${subject}&body=${body}`;
       
       setStatus('success');
       setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
@@ -46,7 +32,7 @@ ${formData.message}
     } catch (error) {
       console.error('Error sending email:', error);
       setStatus('error');
-      setErrorMessage('Failed to send message. Please try again or email us directly at adimfamilyinvestment@gmail.com');
+      setErrorMessage('Failed to open email client. Please email us directly at adimfamilyinvestment@gmail.com');
     }
   };
 

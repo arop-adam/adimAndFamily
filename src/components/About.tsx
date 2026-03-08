@@ -57,7 +57,7 @@ export default function About() {
             <img
               src={logoPng}
               alt="Adim & Family Investments logo"
-              className="w-10 h-10 mr-3 object-contain"
+              className="w-10 h-10 mr-3"
             />
             <h3 className="text-2xl font-bold text-blue-900">Company Details</h3>
           </div>

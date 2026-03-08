@@ -21,7 +21,7 @@ export default function Header() {
             <img
               src={logoPng}
               alt="Adim & Family Investments logo"
-              className="w-16 h-16 object-contain"
+              className="w-16 h-16"
             />
             <div>
               <h1 className="text-xl font-bold text-blue-900">ADIM & FAMILY</h1>

@@ -13,7 +13,7 @@ export default function Footer() {
               <img
                 src={logoPng}
                 alt="Adim & Family Investments logo"
-                className="w-16 h-16 object-contain"
+                className="w-16 h-16"
               />
               <div>
                 <h3 className="text-lg font-bold">ADIM & FAMILY</h3>

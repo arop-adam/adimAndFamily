@@ -5,8 +5,14 @@ import Services from './components/Services';
 import Objectives from './components/Objectives';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import AdminRoute from './components/AdminRoute';
 
 function App() {
+  // Simple route detection
+  if (window.location.pathname === '/admin') {
+    return <AdminRoute />;
+  }
+
   return (
     <div className="min-h-screen">
       <Header />

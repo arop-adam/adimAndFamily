@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
-import { supabase } from '../lib/supabase';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -15,37 +14,39 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!supabase) {
-      setStatus('error');
-      setErrorMessage('Contact form is not configured. Please email us directly at adimfamilyinvestment@gmail.com');
-      return;
-    }
     setStatus('sending');
     setErrorMessage('');
 
     try {
-      const { error } = await supabase
-        .from('contact_inquiries')
-        .insert([
-          {
-            name: formData.name,
-            email: formData.email,
-            phone: formData.phone,
-            subject: formData.subject,
-            message: formData.message
-          }
-        ]);
+      // Create email content
+      const emailContent = {
+        to: 'adimfamilyinvestment@gmail.com',
+        subject: `New Contact Form: ${formData.subject}`,
+        body: `
+Name: ${formData.name}
+Email: ${formData.email}
+Phone: ${formData.phone}
 
-      if (error) throw error;
+Message:
+${formData.message}
+        `.trim()
+      };
 
+      // Use EmailJS or similar service (you'll need to set this up)
+      // For now, I'll create a mailto link as fallback
+      const mailtoLink = `mailto:${emailContent.to}?subject=${encodeURIComponent(emailContent.subject)}&body=${encodeURIComponent(emailContent.body)}`;
+      
+      // Open email client
+      window.location.href = mailtoLink;
+      
       setStatus('success');
       setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
-
+      
       setTimeout(() => setStatus('idle'), 5000);
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.error('Error sending email:', error);
       setStatus('error');
-      setErrorMessage('Failed to send message. Please try again.');
+      setErrorMessage('Failed to send message. Please try again or email us directly at adimfamilyinvestment@gmail.com');
     }
   };
 

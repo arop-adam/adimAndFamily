@@ -22,8 +22,9 @@ export default function Contact() {
       const subject = encodeURIComponent(`New Contact: ${formData.subject}`);
       const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone || 'Not provided'}\n\nMessage:\n${formData.message}\n\n---\nSent from Adim & Family Investment Website`);
       
-      // Open email client with pre-filled content
-      window.location.href = `mailto:adimfamilyinvestment@gmail.com?subject=${subject}&body=${body}`;
+      // Open email client in new tab to avoid leaving current page
+      const mailtoLink = `mailto:adimfamilyinvestment@gmail.com?subject=${subject}&body=${body}`;
+      window.open(mailtoLink, '_blank');
       
       setStatus('success');
       setFormData({ name: '', email: '', phone: '', subject: '', message: '' });

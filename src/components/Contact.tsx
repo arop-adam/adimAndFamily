@@ -18,22 +18,35 @@ export default function Contact() {
     setErrorMessage('');
 
     try {
-      // Create email content
-      const subject = encodeURIComponent(`New Contact: ${formData.subject}`);
-      const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone || 'Not provided'}\n\nMessage:\n${formData.message}\n\n---\nSent from Adim & Family Investment Website`);
+      // Direct email sending using Formspree (you need to set up Formspree)
+      const formId = 'your_formspree_id'; // Replace with your Formspree form ID
       
-      // Open email client in new tab to avoid leaving current page
-      const mailtoLink = `mailto:adimfamilyinvestment@gmail.com?subject=${subject}&body=${body}`;
-      window.open(mailtoLink, '_blank');
-      
-      setStatus('success');
-      setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
-      
-      setTimeout(() => setStatus('idle'), 5000);
+      const response = await fetch(`https://formspree.io/f/${formId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          subject: formData.subject,
+          message: formData.message
+        })
+      });
+
+      if (response.ok) {
+        setStatus('success');
+        setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+        setTimeout(() => setStatus('idle'), 5000);
+      } else {
+        throw new Error('Failed to send message');
+      }
     } catch (error) {
       console.error('Error sending email:', error);
       setStatus('error');
-      setErrorMessage('Failed to open email client. Please email us directly at adimfamilyinvestment@gmail.com');
+      setErrorMessage('Failed to send message. Please try again or email us directly at adimfamilyinvestment@gmail.com');
     }
   };
 

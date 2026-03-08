@@ -18,7 +18,7 @@ export default function Header() {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <img
-              src="/logo.svg"
+              src="/adim.Family/logo.svg"
               alt="Adim & Family Investments logo"
               className="w-16 h-16"
             />

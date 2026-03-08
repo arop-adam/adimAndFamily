@@ -54,7 +54,7 @@ export default function About() {
         <div className="mt-16 bg-gray-50 p-8 rounded-xl">
           <div className="flex items-center justify-center mb-6">
             <img
-              src="/logo.svg"
+              src="/adim.Family/logo.svg"
               alt="Adim & Family Investments logo"
               className="w-10 h-10 mr-3"
             />

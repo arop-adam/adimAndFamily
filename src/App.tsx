@@ -8,8 +8,10 @@ import Footer from './components/Footer';
 import AdminRoute from './components/AdminRoute';
 
 function App() {
-  // Simple route detection
-  if (window.location.pathname === '/admin') {
+  // Simple route detection - check for both base paths
+  const pathname = window.location.pathname;
+  
+  if (pathname === '/admin' || pathname === '/adim.Family/admin') {
     return <AdminRoute />;
   }
 
